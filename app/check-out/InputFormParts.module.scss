@@ -1,0 +1,16 @@
+.inputFormParts {
+  margin: 5px;
+}
+
+.inputFormParts > input {
+  color: black;
+  background-color: gainsboro;
+  border: solid 2px rgb(192, 177, 177);
+}
+
+@media only screen and (max-width: 600px) {
+  .inputFormParts {
+    display: flex;
+    flex-direction: column;
+  }
+}

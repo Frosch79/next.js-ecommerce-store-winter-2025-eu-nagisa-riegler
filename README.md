@@ -1,36 +1,129 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UpLeveled Next.js Ecommerce Store Project - Winter 2025
 
-## Getting Started
+This project is called **AMEOWZON.ng**, an ecommerce store inspired by Amazon.  
+As part of UpLeveled project, I built this site to practice working with Next.js, APIs, and modern frontend/backend integration.  
+The store is themed around cat-related products, offering a playful take on a real-world ecommerce experience.
 
-First, run the development server:
+![site image](./public/readme-image/screenshot.png)
+
+## Technologies
+
+- Next.js
+- Postgres
+- Jest
+- Playwright
+
+## Database Setup
+
+If you don't have PostgreSQL installed yet, follow the instructions from the PostgreSQL step in [UpLeveled's System Setup Instructions](https://github.com/upleveled/system-setup/blob/master/readme.md).
+
+Copy the `.env.example` file to a new file called `.env` (ignored from Git) and fill in the necessary information.
+
+Then, connect to the built-in `postgres` database as administrator in order to create the database:
+
+### Windows
+
+If it asks for a password, use `postgres`.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+psql -U postgres
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### macOS
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+psql postgres
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Linux
 
-## Learn More
+```bash
+sudo -u postgres psql
+```
 
-To learn more about Next.js, take a look at the following resources:
+Once you have connected, run the following to create the database:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```sql
+CREATE DATABASE <database name>;
+CREATE USER <user name> WITH ENCRYPTED PASSWORD '<user password>';
+GRANT ALL PRIVILEGES ON DATABASE <database name> TO <user name>;
+\connect <database name>
+CREATE SCHEMA <schema name> AUTHORIZATION <user name>;
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Quit `psql` using the following command:
 
-## Deploy on Vercel
+```bash
+\q
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+On Linux, it is [best practice to create an operating system user for each database](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html/configuring_and_using_database_servers/using-postgresql_configuring-and-using-database-servers#con_postgresql-users_using-postgresql), to ensure that the operating system user can only access the single database and no other system resources. A different password is needed on Linux because [passwords of operating system users cannot contain the user name](https://github.com/upleveled/system-setup/issues/74). First, generate a random password and copy it:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+openssl rand -hex 16
+```
+
+Then create the user, using the database user name from the previous section above. When you are prompted to create a password for the user, paste in the generated password.
+
+```bash
+sudo adduser <user name>
+```
+
+Once you're ready to use the new user, reconnect using the following command.
+
+**Windows and macOS:**
+
+```bash
+psql -U <user name> <database name>
+```
+
+**Linux:**
+
+```bash
+sudo -u <user name> psql -U <user name> <database name>
+```
+
+## Tests
+
+### Jest
+
+```bash
+pnpm jest
+```
+
+### Playwright
+
+```bash
+pnpm playwright test
+```
+
+## Deployment
+
+Deployed the project on Fly.io
+
+## Authentication
+
+Some pages are protected with sessions and can only be accessed by authenticated users. User needs to login with username and password to be authenticated. Authenticated users can access the protected pages and perform CRUD operations on the animals.
+
+```ts
+export type User = {
+  id: number;
+  username: string;
+};
+
+type UserWithPasswordHash = User & {
+  passwordHash: string;
+};
+
+type Error = {
+  message: string;
+};
+```
+
+```ts
+- /api/(auth)/register
+  - POST   => User   | Error[]   (create user)
+
+- /api/(auth)/login
+  - POST   => User   | Error[]   (login user)
+```

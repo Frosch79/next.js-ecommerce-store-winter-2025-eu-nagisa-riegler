@@ -1,0 +1,23 @@
+.page {
+  display: flex;
+  flex-direction: column;
+}
+
+.counter > p {
+  background-color: blanchedalmond;
+  width: 30%;
+  text-align: center;
+  align-content: center;
+}
+
+.price {
+  font-size: large;
+  font-weight: 500;
+}
+
+@media only screen and (max-width: 600px) {
+  .image {
+    width: 80vw;
+    height: auto;
+  }
+}

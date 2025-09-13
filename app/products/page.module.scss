@@ -1,0 +1,15 @@
+.productLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 8px;
+}
+
+.productLink > li {
+  margin: 5px;
+}
+
+.productLinkImage {
+  display: flex;
+  flex-direction: column;
+}
