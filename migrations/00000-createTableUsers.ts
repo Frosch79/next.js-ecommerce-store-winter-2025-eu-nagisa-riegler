@@ -19,16 +19,16 @@ export const inputUserSchema = z.object({
 });
 
 export async function up(sql: Sql) {
-  await sql` CREATE TABLE users(
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  first_name varchar(30) NOT NULL,
-  last_name varchar(30) NOT NULL,
-  email varchar(50) NOT NULL
-
-)`;
+  await sql`
+    CREATE TABLE users (
+      id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+      first_name varchar(30) NOT NULL,
+      last_name varchar(30) NOT NULL,
+      email varchar(50) NOT NULL
+    )
+  `;
 }
 
 export async function down(sql: Sql) {
-  await sql`
-DROP TABLE users`;
+  await sql`DROP TABLE users`;
 }

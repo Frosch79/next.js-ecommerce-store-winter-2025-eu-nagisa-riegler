@@ -14,7 +14,7 @@ export async function GET(
   { params }: CartItemParams,
 ): Promise<NextResponse<CartItemResponseBodyGet>> {
   const cartItem = await getUserCartInsecure(Number((await params).cartId));
-  if (!cartItem) {
+  if (typeof cartItem === 'undefined') {
     return NextResponse.json(
       { error: 'CartItem does not exist' },
       {
