@@ -1,14 +1,17 @@
-import { config } from 'dotenv-safe';
 import postgres from 'postgres';
+import { setEnvironmentVariables } from './util/config';
 
-config();
+setEnvironmentVariables();
 
 const sql = postgres();
 
 console.log(
   await sql`
-
-  SELECT * FROM products`,
+    SELECT
+      *
+    FROM
+      products
+  `,
 );
 
 await sql.end();

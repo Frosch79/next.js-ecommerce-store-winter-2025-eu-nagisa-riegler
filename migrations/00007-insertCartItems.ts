@@ -35,21 +35,29 @@ const cartItem = [
 
 export async function up(sql: Sql) {
   for (const cart of cartItem) {
-    await sql`INSERT INTO
-  cart_item(
-cart_id,
-    products_id,
-    quantity
-
-  )
-  VALUES
-  (${cart.cartId}, ${cart.productId},${cart.quantity})`;
+    await sql`
+      INSERT INTO
+        cart_item (
+          cart_id,
+          products_id,
+          quantity
+        )
+      VALUES
+        (
+          ${cart.cartId},
+          ${cart.productId},
+          ${cart.quantity}
+        )
+    `;
   }
 }
 
 export async function down(sql: Sql) {
   for (const cart of cartItem) {
-    await sql`DELETE FROM cart_item
-    WHERE id = ${cart.id} `;
+    await sql`
+      DELETE FROM cart_item
+      WHERE
+        id = ${cart.id}
+    `;
   }
 }

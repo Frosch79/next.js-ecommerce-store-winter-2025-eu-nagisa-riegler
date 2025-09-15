@@ -49,13 +49,7 @@ export default function InputForm() {
   const [securityCode, setSecurityCode] = useState(0);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const today = new Date()
-    .toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-    })
-    .replaceAll('/', '-');
+  const today = new Date();
 
   useEffect(() => {
     const callCookies = async () => {
@@ -103,9 +97,12 @@ export default function InputForm() {
       return;
     }
 
-    const response = await fetch(`/api/users/1/user-cart`, {
+    const response = await fetch('/api/users/1/user-cart', {
       method: 'POST',
-      body: JSON.stringify({ userId: 1, date: today }),
+      body: JSON.stringify({
+        userId: 1,
+        date: today,
+      }),
     });
 
     setErrorMessage('');
@@ -149,6 +146,7 @@ export default function InputForm() {
           newErrorMessage = responseBody.error;
         }
         setErrorMessage(newErrorMessage);
+        console.log('test  2');
         return;
       }
     }

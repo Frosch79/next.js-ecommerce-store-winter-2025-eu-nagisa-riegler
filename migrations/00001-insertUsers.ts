@@ -35,21 +35,25 @@ const users = [
 
 export async function up(sql: Sql) {
   for (const user of users) {
-    await sql`INSERT INTO
-  users(
-  first_name ,
-  last_name ,
-  email
-
-  )
-  VALUES
-  (${user.firstName}, ${user.lastName},${user.email})`;
+    await sql`
+      INSERT INTO
+        users (first_name, last_name, email)
+      VALUES
+        (
+          ${user.firstName},
+          ${user.lastName},
+          ${user.email}
+        )
+    `;
   }
 }
 
 export async function down(sql: Sql) {
   for (const user of users) {
-    await sql`DELETE FROM users
-    WHERE id = ${user.id}`;
+    await sql`
+      DELETE FROM users
+      WHERE
+        id = ${user.id}
+    `;
   }
 }

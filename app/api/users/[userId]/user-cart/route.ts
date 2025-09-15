@@ -12,6 +12,7 @@ export async function POST(
 ): Promise<NextResponse<CartResponseBodyPost>> {
   const requestBody = await request.json();
   const result = cartSchema.safeParse(requestBody);
+
   if (!result.success) {
     return NextResponse.json(
       { error: 'Request does not contain cart object' },
