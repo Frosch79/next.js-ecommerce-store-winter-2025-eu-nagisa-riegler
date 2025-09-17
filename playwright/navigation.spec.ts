@@ -65,7 +65,7 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
     await page.getByTestId(`products-link`).click();
     await page.waitForURL('/products');
     await page.getByTestId(`product-${product.id}`).click();
-    await page.waitForURL(`/products/${product.id}`);
+    await page.waitForURL(`**/products/${product.id}`);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText(
       product.productName.replace('-', ' '),
     );
