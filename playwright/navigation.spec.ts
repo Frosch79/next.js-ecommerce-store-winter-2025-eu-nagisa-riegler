@@ -34,6 +34,12 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
   async function cart(quantity: number) {
     // if cart is added or removed
     await page.reload();
+    await page
+      .locator('header')
+      .locator(
+        `[data-test-id="cart-link"]:has-text("cart") > [data-test-id="cart-count"]:has-text("${quantity}")`,
+      )
+      .waitFor({ state: 'visible' });
     await expect(
       page
         .locator('header')
