@@ -9,9 +9,9 @@ jobs:
     # TODO: Update environment variables with your own database credentials
     env:
       PGHOST: localhost
-      PGDATABASE: cat_products
-      PGUSERNAME: cat_products
-      PGPASSWORD: cat_products
+      PGDATABASE: next_js_example_winter_2025
+      PGUSERNAME: next_js_example_winter_2025
+      PGPASSWORD: next_js_example_winter_2025
     steps:
       - name: Start preinstalled PostgreSQL on Ubuntu
         run: |
