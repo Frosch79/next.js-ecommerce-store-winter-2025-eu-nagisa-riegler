@@ -78,10 +78,8 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
       }
       await page.getByTestId('product-add-to-cart').click();
     }
-
-    await cart(count);
   }
-
+  await cart(count);
   await page.getByTestId(`cart-link`).click();
   await page.waitForURL('/users/cart');
 
