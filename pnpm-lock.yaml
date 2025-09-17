@@ -17,9 +17,6 @@ importers:
       dotenv-safe:
         specifier: 9.1.0
         version: 9.1.0(dotenv@16.5.0)
-      eslint-plugin-sql:
-        specifier: ^3.2.2
-        version: 3.2.2(eslint@9.35.0)(typescript@5.9.2)
       next:
         specifier: 15.1.7
         version: 15.1.7(@babel/core@7.28.4)(@playwright/test@1.55.0)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)(sass@1.84.0)
@@ -2108,12 +2105,6 @@ packages:
     peerDependencies:
       eslint: ^8.0.0 || ^9.0.0
 
-  eslint-plugin-sql@3.2.2:
-    resolution: {integrity: sha512-J4S2dnM6g14mKIO1pWVJti/jLROdmeUmgEYfGe6052kczLlquO//QYIxDXAPbkxw8sjZak5QZfG5ku8570HLLQ==}
-    engines: {node: '>=12'}
-    peerDependencies:
-      eslint: '>=8.1.0'
-
   eslint-plugin-testing-library@7.6.6:
     resolution: {integrity: sha512-eSexC+OPhDLuCpLbFEC7Qrk0x4IE4Mn+UW0db8YAhUatVB6CzGHdeHv4pyoInglbhhQc0Z9auY/2HKyMZW5s7Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0, pnpm: ^9.14.0}
@@ -2929,9 +2920,6 @@ packages:
   lodash.truncate@4.4.2:
     resolution: {integrity: sha512-jttmRe7bRse52OsWIMDLaXxWqRAmtIUccAQ3garviCqJjafXOfNMO0yMfNpdD6zbGaTU0P5Nz7e7gAT6cKmJRw==}
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-
   loose-envify@1.4.0:
     resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==}
     hasBin: true
@@ -3012,10 +3000,6 @@ packages:
 
   ms@2.1.3:
     resolution: {integrity: sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==}
-
-  multiline-ts@4.0.1:
-    resolution: {integrity: sha512-urYEajhpUHVlGH8EYEeYnBHlVJ2ddbaQZ/lvZ1OnZFbb2mZDSDDzHoOCa9w5G7S21Wl/1FgJX6ku5OWzZgIoUg==}
-    engines: {node: '>=18.18.0'}
 
   nanoid@3.3.11:
     resolution: {integrity: sha512-N8SpfPUnUp1bK+PMYW8qSWdl9U+wwNWI4QKxOYDy9JAro3WMX7p2OeVRF9v+347pnakNevPmiHhNmZ2HbFA76w==}
@@ -3536,10 +3520,6 @@ packages:
   sql-formatter@15.6.9:
     resolution: {integrity: sha512-r9VKnkRfKW7jbhTgytwbM+JqmFclQYN9L58Z3UTktuy9V1f1Y+rGK3t70Truh2wIOJzvZkzobAQ2PwGjjXsr6Q==}
     hasBin: true
-
-  sql-parse@0.1.5:
-    resolution: {integrity: sha512-e2ExBX6iDHoCDC1zN2NvZV49UMhKVLvvwrDjzSVHFS3TKHKtIpl2nMDQkdlbTjDVvf2bxRYBq9iXAAMZvZpGVA==}
-    engines: {node: '>=0.10'}
 
   stable-hash-x@0.2.0:
     resolution: {integrity: sha512-o3yWv49B/o4QZk5ZcsALc6t0+eCelPc44zZsLtCQnZPDwFpDYSWcDnrv2TtMmMbQ7uKo3J0HTURCqckw23czNQ==}
@@ -6183,19 +6163,6 @@ snapshots:
       semver: 7.7.2
       typescript: 5.9.2
 
-  eslint-plugin-sql@3.2.2(eslint@9.35.0)(typescript@5.9.2):
-    dependencies:
-      '@typescript-eslint/utils': 8.43.0(eslint@9.35.0)(typescript@5.9.2)
-      debug: 4.4.3
-      eslint: 9.35.0
-      lodash: 4.17.21
-      multiline-ts: 4.0.1
-      sql-formatter: 15.6.9
-      sql-parse: 0.1.5
-    transitivePeerDependencies:
-      - supports-color
-      - typescript
-
   eslint-plugin-testing-library@7.6.6(eslint@9.35.0)(typescript@5.9.2):
     dependencies:
       '@typescript-eslint/scope-manager': 8.43.0
@@ -7260,8 +7227,6 @@ snapshots:
 
   lodash.truncate@4.4.2: {}
 
-  lodash@4.17.21: {}
-
   loose-envify@1.4.0:
     dependencies:
       js-tokens: 4.0.0
@@ -7324,8 +7289,6 @@ snapshots:
   mri@1.2.0: {}
 
   ms@2.1.3: {}
-
-  multiline-ts@4.0.1: {}
 
   nanoid@3.3.11: {}
 
@@ -7883,8 +7846,6 @@ snapshots:
     dependencies:
       argparse: 2.0.1
       nearley: 2.20.1
-
-  sql-parse@0.1.5: {}
 
   stable-hash-x@0.2.0: {}
 

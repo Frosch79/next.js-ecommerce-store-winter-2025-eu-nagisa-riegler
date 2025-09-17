@@ -27,15 +27,16 @@ export const itemSchema = z.object({
 });
 
 export async function up(sql: Sql) {
-  await sql` CREATE TABLE cart_item(
-     id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
- cart_id integer NOT NULL REFERENCES cart(id) ON DELETE CASCADE,
- products_id integer NOT NULL REFERENCES products(id) ON DELETE CASCADE,
-  quantity integer NOT NULL
-)`;
+  await sql`
+    CREATE TABLE cart_item (
+      id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+      cart_id integer NOT NULL REFERENCES cart (id) ON DELETE CASCADE,
+      products_id integer NOT NULL REFERENCES products (id) ON DELETE CASCADE,
+      quantity integer NOT NULL
+    )
+  `;
 }
 
 export async function down(sql: Sql) {
-  await sql`
-DROP TABLE cart_item`;
+  await sql` DROP TABLE cart_item`;
 }

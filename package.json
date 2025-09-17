@@ -14,7 +14,6 @@
     "@upleveled/ley": "0.9.2",
     "dayjs": "1.11.13",
     "dotenv-safe": "9.1.0",
-    "eslint-plugin-sql": "^3.2.2",
     "next": "15.1.7",
     "postgres": "3.4.5",
     "react": "^19.1.1",
