@@ -30,7 +30,7 @@ export default async function Product(props: Props) {
   if (!catProduct) notFound();
   return (
     <div className={styles.page}>
-      <h1>{catProduct.productName.replace('-', ' ')}</h1>
+      <h1>{catProduct.productName}</h1>
       <ul key={`product-${catProduct.id}`}>
         <li>
           <Image
