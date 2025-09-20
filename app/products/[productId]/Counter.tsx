@@ -28,7 +28,12 @@ export default function Counter(props: Props) {
           value="-"
         />
 
-        <p data-test-id="product-quantity">{count}</p>
+        <input
+          className={styles.countText}
+          data-test-id="product-quantity"
+          value={count}
+          readOnly={true}
+        />
 
         <input
           className={styles.button}
