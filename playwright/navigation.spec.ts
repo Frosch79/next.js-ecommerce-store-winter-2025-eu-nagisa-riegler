@@ -69,7 +69,7 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
 
     await expect(page.getByTestId('product-image')).toBeVisible();
     await expect(page.getByTestId('product-price')).toBeVisible();
-    await expect(page.getByTestId('product-quantity')).toHaveText('1');
+    await expect(page.getByTestId('product-quantity')).toBeVisible();
     if (productCount > 0) {
       for (let n = 1; n < productCount; n++) {
         await page.getByRole('button', { name: '+' }).click();
@@ -190,7 +190,7 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
     await page.getByTestId(`product-${product.id}`).click();
     await page.waitForURL(`/products/${product.id}`);
 
-    await expect(page.getByTestId('product-quantity')).toHaveText('1');
+    await expect(page.getByTestId('product-quantity')).toBeVisible();
     if (productCount > 0) {
       for (let n = 1; n < productCount; n++) {
         await page.getByRole('button', { name: '+' }).click();

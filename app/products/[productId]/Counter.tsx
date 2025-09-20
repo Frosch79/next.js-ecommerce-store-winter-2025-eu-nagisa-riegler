@@ -31,7 +31,7 @@ export default function Counter(props: Props) {
         <input
           className={styles.countText}
           data-test-id="product-quantity"
-          value={count}
+          placeholder={count.toString()}
           readOnly={true}
         />
 
