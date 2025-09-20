@@ -12,7 +12,6 @@ import styles from './CartList.module.scss';
 export default function CartList() {
   const [products, setProducts] = useState<Products[]>([]);
   const [cartItems, setCartItems] = useState<ProductCount[]>([]);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const callProductToCart = async () => {
@@ -27,8 +26,6 @@ export default function CartList() {
       setCartItems(userCartItems);
     };
     callProductToCart().catch((error) => console.log(error));
-
-    setIsLoading(false);
   }, []);
 
   // calculate items total price
@@ -60,40 +57,33 @@ export default function CartList() {
 
   return (
     <div>
-      {isLoading ? (
-        <p>Loading now</p>
-      ) : (
-        <>
-          {cartItems.map((obj) => {
-            const findItem = products.find((product) => obj.id === product.id);
-            if (!findItem) return <p key="message">Your Cart is empty</p>;
-            return (
-              <div
-                className={styles.cartItems}
-                key={`adding-${obj.id}`}
-                data-test-id={`cart-product-${obj.id}`}
-              >
-                <ul>
-                  <li>
-                    <Link href={`/products/${obj.id}`}>
-                      {findItem.productName}
-                    </Link>
-                  </li>
-                  <li
-                    data-test-id={`cart-product-quantity-${obj.id}`}
-                  >{`${findItem.price} x ${obj.count}`}</li>
-                </ul>
-                <Button
-                  dataTestId={`cart-product-remove-${obj.id}`}
-                  type="button"
-                  onClick={() => removeHandle(obj.id)}
-                  buttonName="Remove"
-                />
-              </div>
-            );
-          })}
-        </>
-      )}
+      {cartItems.map((obj) => {
+        const findItem = products.find((product) => obj.id === product.id);
+        if (!findItem) return <p key="message">Your Cart is empty</p>;
+        return (
+          <div
+            className={styles.cartItems}
+            key={`adding-${obj.id}`}
+            data-test-id={`cart-product-${obj.id}`}
+          >
+            <ul>
+              <li>
+                <Link href={`/products/${obj.id}`}>{findItem.productName}</Link>
+              </li>
+              <li
+                data-test-id={`cart-product-quantity-${obj.id}`}
+              >{`${findItem.price} x ${obj.count}`}</li>
+            </ul>
+            <Button
+              dataTestId={`cart-product-remove-${obj.id}`}
+              type="button"
+              onClick={() => removeHandle(obj.id)}
+              buttonName="Remove"
+            />
+          </div>
+        );
+      })}
+
       <p data-test-id="cart-total">{`TOTAL: $${total}`}</p>
     </div>
   );
