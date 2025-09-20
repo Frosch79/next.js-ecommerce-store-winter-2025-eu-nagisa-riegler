@@ -20,6 +20,7 @@ export default async function Products() {
             <li>
               <Link
                 data-test-id={`product-${product.id}`}
+                prefetch={true}
                 href={`/products/${product.id}`}
                 className={styles.productLinkImage}
               >
