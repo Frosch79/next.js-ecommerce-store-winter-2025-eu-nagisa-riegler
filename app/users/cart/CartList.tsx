@@ -57,7 +57,9 @@ export default function CartList(props: Props) {
           >
             <ul>
               <li>
-                <Link href={`/products/${obj.id}`}>{findItem.productName}</Link>
+                <Link href={`/products/${obj.id}`}>
+                  {findItem.productName.replace('-', ' ')}
+                </Link>
               </li>
               <li
                 data-test-id={`cart-product-quantity-${obj.id}`}
