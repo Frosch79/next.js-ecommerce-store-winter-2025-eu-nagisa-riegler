@@ -63,7 +63,7 @@ export default function CartList(props: Props) {
               </li>
               <li
                 data-test-id={`cart-product-quantity-${obj.id}`}
-              >{`sub total:${findItem.price} × ${obj.count}`}</li>
+              >{`subtotal:${findItem.price} × ${obj.count}`}</li>
             </ul>
             <Button
               dataTestId={`cart-product-remove-${obj.id}`}
