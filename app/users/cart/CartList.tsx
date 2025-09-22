@@ -2,16 +2,19 @@
 
 import Link from 'next/link';
 import { use, useMemo, useState } from 'react';
-import type { Products } from '../../../database/products';
+import type { Product } from '../../../migrations/00002-createTableProducts';
 import { removeProductCookies } from '../../check-out/action';
 import type { ProductCount } from '../../products/[productId]/action';
-import { callProductToCart, getProductCookies } from './action';
 import Button from './Button';
 import styles from './CartList.module.scss';
 
-export default function CartList() {
-  const products = use(callProductToCart());
-  const cookieItem = use(getProductCookies());
+type Props = {
+  callItems: Promise<Product[]>;
+  productCookies: Promise<ProductCount[]>;
+};
+export default function CartList(props: Props) {
+  const products: Product[] = use(props.callItems);
+  const cookieItem: ProductCount[] = use(props.productCookies);
 
   const [cartItems, setCartItems] = useState<ProductCount[]>(cookieItem);
 
@@ -20,7 +23,7 @@ export default function CartList() {
     const calculateTotal = cartItems.reduce(
       (sum: number, item: ProductCount): number => {
         const findItem = products.find(
-          (product: Products) => product.id === item.id,
+          (product: Product) => product.id === item.id,
         );
         if (!findItem) return 0;
 
