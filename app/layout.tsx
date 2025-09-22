@@ -66,6 +66,7 @@ export default async function RootLayout(props: Props) {
             <Link
               data-test-id="cart-link"
               href="/users/cart"
+              prefetch={true}
               className={`${styles.textBorder} ${styles.cartLink}`}
             >
               cart <p data-test-id="cart-count">{totalCart}</p>
