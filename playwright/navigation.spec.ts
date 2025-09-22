@@ -288,8 +288,11 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
       expect(
         (await page.locator('[data-test-id*="cart-product"]').all()).length,
       ).toBe(0);
+
+      return;
     } else {
       await expect(page.getByText('Cart is empty !')).toBeVisible();
+      return;
     }
   }
 });
