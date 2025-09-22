@@ -94,7 +94,10 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
       .locator('[data-test-id*="cart-product-quantity"]')
       .nth(randomRemove)
       .innerText();
-    const removeCount = searchText.slice(searchText.indexOf('×') + 1).trim();
+    const removeCount = searchText
+      .slice(searchText.indexOf('quantity') + 9)
+      .trim();
+
     count -= Number(removeCount);
 
     await page
