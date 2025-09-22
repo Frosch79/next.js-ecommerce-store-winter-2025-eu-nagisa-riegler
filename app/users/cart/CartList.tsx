@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { use, useState } from 'react';
+import { use, useMemo, useState } from 'react';
 import type { Product } from '../../../migrations/00002-createTableProducts';
 import { removeProductCookies } from '../../check-out/action';
 import type { ProductCount } from '../../products/[productId]/action';
@@ -18,7 +18,7 @@ export default function CartList(props: Props) {
 
   const [cartItems, setCartItems] = useState<ProductCount[]>(cookieItem);
 
-  const total = () => {
+  const total = useMemo(() => {
     if (cartItems.length === 0) return 0;
     const calculateTotal = cartItems.reduce(
       (sum: number, item: ProductCount): number => {
@@ -32,7 +32,7 @@ export default function CartList(props: Props) {
       0,
     );
     return calculateTotal;
-  };
+  }, [cartItems, products]);
 
   const removeHandle = async (id: number) => {
     const newItemsArray = cartItems.filter((item) => {
@@ -75,7 +75,7 @@ export default function CartList(props: Props) {
         );
       })}
 
-      <p data-test-id="cart-total">{`TOTAL: $${total()}`}</p>
+      <p data-test-id="cart-total">{`TOTAL: $${total}`}</p>
     </div>
   );
 }
