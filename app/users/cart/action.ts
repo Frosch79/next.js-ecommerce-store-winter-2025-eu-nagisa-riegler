@@ -46,3 +46,14 @@ export async function removeCookie(id: number) {
 export const getCartProducts = async () => {
   return await getProductsInsecure();
 };
+
+export async function callProductToCart() {
+  const userCartItems = await getProductCookies();
+  const cartProducts = await getCartProducts();
+  const itemList = [];
+  for (const item of userCartItems) {
+    const product = cartProducts.find((data) => data.id === item.id);
+    if (product) itemList.push(product);
+  }
+  return itemList;
+}

@@ -1,5 +1,6 @@
 'use server';
 import { cookies } from 'next/headers';
+import { getProductsInsecure } from '../../database/users';
 import { getCookies } from '../../util/cookies';
 import { perseJson } from '../../util/json';
 import type { ProductCount } from '../products/[productId]/action';
@@ -17,4 +18,18 @@ export async function deleteProductCookies() {
 
 export async function removeProductCookies(newCookie: ProductCount[]) {
   (await cookies()).set('cart', JSON.stringify(newCookie));
+}
+
+export async function checkOutProducts() {
+  const cookieData = await checkCookies();
+  const products = await getProductsInsecure();
+  const total = cookieData.reduce((sum, value) => {
+    const findProduct = products.find((obj) => obj.id === value.id);
+
+    if (!findProduct) return 0;
+
+    return sum + findProduct.price * value.count;
+  }, 0);
+
+  return total;
 }

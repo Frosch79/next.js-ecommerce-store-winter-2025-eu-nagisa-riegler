@@ -5,7 +5,7 @@ import { useEffect, useMemo, useState } from 'react';
 import type { Products } from '../../../database/products';
 import { removeProductCookies } from '../../check-out/action';
 import type { ProductCount } from '../../products/[productId]/action';
-import { getCartProducts, getProductCookies } from './action';
+import { callProductToCart, getProductCookies } from './action';
 import Button from './Button';
 import styles from './CartList.module.scss';
 
@@ -14,18 +14,13 @@ export default function CartList() {
   const [cartItems, setCartItems] = useState<ProductCount[]>([]);
 
   useEffect(() => {
-    const callProductToCart = async () => {
-      const userCartItems = await getProductCookies();
-      const cartProducts = await getCartProducts();
-      const itemList = [];
-      for (const item of userCartItems) {
-        const product = cartProducts.find((data) => data.id === item.id);
-        if (product) itemList.push(product);
-      }
-      setProducts(itemList);
-      setCartItems(userCartItems);
+    const callItems = async () => {
+      const items = await callProductToCart();
+      const productsCookie = await getProductCookies();
+      setCartItems(productsCookie);
+      setProducts(items);
     };
-    callProductToCart().catch((error) => console.log(error));
+    callItems().catch((error) => console.log(error));
   }, []);
 
   // calculate items total price
