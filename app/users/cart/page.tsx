@@ -1,6 +1,3 @@
-import type { Product } from '../../../migrations/00002-createTableProducts';
-import type { ProductCount } from '../../products/[productId]/action';
-import { callProductToCart, getProductCookies } from './action';
 import CartList from './CartList';
 import CheckOutButton from './CheckOutButton';
 import style from './page.module.scss';
