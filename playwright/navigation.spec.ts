@@ -269,7 +269,9 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
 
     await page.getByRole('button', { name: 'Confirm Order' }).click();
 
-    if (cartLength > 0) {
+    if (cartLength === 0) {
+      await expect(page.getByText('Cart is empty !')).toBeVisible();
+    } else {
       // if cart is not empty
       await page.waitForURL('/greeting');
       await expect(page).toHaveTitle(/Thank you for your order/);
@@ -288,11 +290,6 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
       expect(
         (await page.locator('[data-test-id*="cart-product"]').all()).length,
       ).toBe(0);
-
-      return;
-    } else {
-      await expect(page.getByText('Cart is empty !')).toBeVisible();
-      return;
     }
   }
 });
