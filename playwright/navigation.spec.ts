@@ -202,6 +202,7 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
   await page.getByTestId(`cart-link`).click();
   await page.waitForURL('/users/cart');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+
   const cartLength = (
     await page.locator('[data-test-id*="cart-product-quantity"]').all()
   ).length;

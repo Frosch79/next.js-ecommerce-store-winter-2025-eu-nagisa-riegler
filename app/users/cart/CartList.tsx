@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { use, useMemo, useState } from 'react';
 import type { Products } from '../../../database/products';
 import { removeProductCookies } from '../../check-out/action';
 import type { ProductCount } from '../../products/[productId]/action';
@@ -10,20 +10,11 @@ import Button from './Button';
 import styles from './CartList.module.scss';
 
 export default function CartList() {
-  const [products, setProducts] = useState<Products[]>([]);
-  const [cartItems, setCartItems] = useState<ProductCount[]>([]);
+  const products = use(callProductToCart());
+  const cookieItem = use(getProductCookies());
 
-  useEffect(() => {
-    const callItems = async () => {
-      const items = await callProductToCart();
-      const productsCookie = await getProductCookies();
-      setCartItems(productsCookie);
-      setProducts(items);
-    };
-    callItems().catch((error) => console.log(error));
-  }, []);
+  const [cartItems, setCartItems] = useState<ProductCount[]>(cookieItem);
 
-  // calculate items total price
   const total = useMemo(() => {
     if (cartItems.length === 0) return 0;
     const calculateTotal = cartItems.reduce(
