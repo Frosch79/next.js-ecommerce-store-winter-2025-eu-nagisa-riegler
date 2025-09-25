@@ -63,8 +63,7 @@ export default function CartList(props: Props) {
               </li>
               <li
                 data-test-id={`cart-product-quantity-${obj.id}`}
-              >{`quantity:${obj.count}`}</li>
-              <li>{`price:${findItem.price * obj.count}`}</li>
+              >{`${findItem.price * obj.count}`}</li>
             </ul>
             <Button
               dataTestId={`cart-product-remove-${obj.id}`}
@@ -76,7 +75,7 @@ export default function CartList(props: Props) {
         );
       })}
 
-      <p data-test-id="cart-total">{`TOTAL: $${total}`}</p>
+      <p data-test-id="cart-total">{`TOTAL: ${total}`}</p>
     </div>
   );
 }
