@@ -4,3 +4,11 @@
 
   border-bottom: dashed 2px rgba(102, 59, 59, 0.877);
 }
+
+.priceText {
+  display: flex;
+  flex-direction: row;
+  p {
+    margin-right: 10px;
+  }
+}

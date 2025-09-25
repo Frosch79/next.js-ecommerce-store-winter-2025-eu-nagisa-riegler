@@ -61,10 +61,12 @@ export default function CartList(props: Props) {
                   {findItem.productName.replace('-', ' ')}
                 </Link>
               </li>
-              <li
-                data-test-id={`cart-product-quantity-${obj.id}`}
-              >{`${obj.count}`}</li>
-              <li>{`price:${findItem.price * obj.count}`}</li>
+              <li className={styles.priceText}>
+                <p
+                  data-test-id={`cart-product-quantity-${obj.id}`}
+                >{`${obj.count}`}</p>
+                <p>{`price:${findItem.price * obj.count}`}</p>
+              </li>
             </ul>
             <Button
               dataTestId={`cart-product-remove-${obj.id}`}
@@ -75,8 +77,10 @@ export default function CartList(props: Props) {
           </div>
         );
       })}
-
-      <p data-test-id="cart-total">{`TOTAL: ${total}`}</p>
+      <div className={styles.priceText}>
+        <p>TOTAL: </p>
+        <p data-test-id="cart-total">{`${total}`}</p>
+      </div>
     </div>
   );
 }
