@@ -13,7 +13,9 @@ export default function Counter(props: Props) {
   const [count, setCount] = useState(1);
 
   const cookieHandle = () => {
-    createCookie({ id, count }, 'cart').catch((error) => console.log(error));
+    if (count > 0) {
+      createCookie({ id, count }, 'cart').catch((error) => console.log(error));
+    }
     setCount(1);
   };
 
@@ -31,8 +33,12 @@ export default function Counter(props: Props) {
         <input
           className={styles.countText}
           data-test-id="product-quantity"
-          placeholder={count.toString()}
-          readOnly={true}
+          onChange={(event) =>
+            Number(event.target.value) >= 0
+              ? setCount(Number(event.target.value))
+              : count
+          }
+          value={count}
         />
 
         <input
