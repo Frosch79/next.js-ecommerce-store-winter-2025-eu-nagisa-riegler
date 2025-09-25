@@ -291,7 +291,7 @@ export default function InputForm() {
         <Button
           buttonName="Confirm Order"
           type="submit"
-          data-test-id="checkout-confirm-order"
+          dataTestId="checkout-confirm-order"
         />
       </form>
       <ErrorMessage>{errorMessage}</ErrorMessage>
