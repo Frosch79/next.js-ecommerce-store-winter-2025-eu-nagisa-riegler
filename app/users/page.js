@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { getUsersCartInsecure } from '../../database/users';
+import { getUsersCartInsecure } from '../../database/cart';
 
 export const metadata = {
   title: 'Users',
