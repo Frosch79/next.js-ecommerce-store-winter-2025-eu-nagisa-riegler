@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createUserCartInsecure } from '../../../../../database/users';
+import { createUserCartInsecure } from '../../../../../database/cart';
 import {
   type Cart,
   cartSchema,

@@ -1,21 +1,7 @@
 'use server';
 import { cookies } from 'next/headers';
-import { getProductsInsecure } from '../../../database/users';
 import { getCookies } from '../../../util/cookies';
 import { perseJson } from '../../../util/json';
-
-export async function getProductCookies() {
-  const cookie = await getCookies('cart');
-
-  let perseStoreCookie =
-    typeof cookie === 'undefined' ? [] : perseJson(cookie) || [];
-
-  if (!Array.isArray(perseStoreCookie)) {
-    perseStoreCookie = [];
-  }
-
-  return perseStoreCookie;
-}
 
 export async function checkCookies() {
   const cookie = await getCookies('cart');
@@ -41,19 +27,4 @@ export async function removeCookie(id: number) {
   }
 
   (await cookies()).set('cart', JSON.stringify(parseCookie));
-}
-
-export const getCartProducts = async () => {
-  return await getProductsInsecure();
-};
-
-export async function callProductToCart() {
-  const userCartItems = await getProductCookies();
-  const cartProducts = await getCartProducts();
-  const itemList = [];
-  for (const item of userCartItems) {
-    const product = cartProducts.find((data) => data.id === item.id);
-    if (product) itemList.push(product);
-  }
-  return itemList;
 }

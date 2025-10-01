@@ -2,8 +2,9 @@ import './globals.scss';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { getCookies } from '../util/cookies';
+import { perseJson } from '../util/json';
 import styles from './page.module.scss';
-import { getProductCookies } from './users/cart/action';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,12 +30,18 @@ type Props = {
   children: ReactNode;
 };
 export default async function RootLayout(props: Props) {
-  const cookie = await getProductCookies();
+  const cookie = await getCookies('cart');
+  let perseStoreCookie =
+    typeof cookie === 'undefined' ? [] : perseJson(cookie) || [];
+
+  if (!Array.isArray(perseStoreCookie)) {
+    perseStoreCookie = [];
+  }
 
   const totalCart =
-    cookie.length <= 0
+    perseStoreCookie.length <= 0
       ? 0
-      : cookie.reduce((sum, value) => sum + value.count, 0);
+      : perseStoreCookie.reduce((sum, value) => sum + value.count, 0);
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

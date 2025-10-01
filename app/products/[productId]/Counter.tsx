@@ -14,7 +14,7 @@ export default function Counter(props: Props) {
 
   const cookieHandle = () => {
     if (count > 0) {
-      createCookie({ id, count }, 'cart').catch((error) => console.log(error));
+      createCookie({ id, count }).catch((error) => console.log(error));
     }
     setCount(1);
   };

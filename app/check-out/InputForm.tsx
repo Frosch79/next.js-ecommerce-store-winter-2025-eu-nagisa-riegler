@@ -2,19 +2,21 @@
 
 import dayjs from 'dayjs';
 import { useRouter } from 'next/navigation';
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, useState } from 'react';
 import type { CartItem } from '../../migrations/00006-createTableCartItems';
 import { getLocalStorage, setLocalStorage } from '../../util/localStorage';
 import type { ItemResponseBodyPost } from '../api/users/[userId]/user-cart/[cartId]/items/route';
 import type { CartResponseBodyPost } from '../api/users/[userId]/user-cart/route';
 import ErrorMessage from '../ErrorMessage';
 import type { ProductCount } from '../products/[productId]/action';
-import { checkCookies, deleteProductCookies } from './action';
+import { deleteProductCookies } from './action';
 import Button from './Button';
 import styles from './InputForm.module.scss';
 import InputFormParts from './InputFormParts';
 
-export default function InputForm() {
+type Props = { cookie: ProductCount[] };
+
+export default function InputForm(props: Props) {
   const router = useRouter();
 
   function getFromLocalStorage(key: string | number) {
@@ -24,7 +26,6 @@ export default function InputForm() {
     return storage;
   }
 
-  const [cart, setCart] = useState<ProductCount[]>([]);
   const [firstName, setFirstName] = useState(
     getFromLocalStorage('firstName') || '',
   );
@@ -50,15 +51,7 @@ export default function InputForm() {
   const [errorMessage, setErrorMessage] = useState('');
 
   const today = new Date();
-
-  useEffect(() => {
-    const callCookies = async () => {
-      const response = await checkCookies();
-
-      setCart(response);
-    };
-    callCookies().catch((error) => console.log(error));
-  }, []);
+  const cart = props.cookie;
 
   const clickHandle = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

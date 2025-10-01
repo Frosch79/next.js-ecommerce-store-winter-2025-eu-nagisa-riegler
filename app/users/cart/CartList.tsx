@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { use, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import type { Product } from '../../../migrations/00002-createTableProducts';
 import { removeProductCookies } from '../../check-out/action';
 import type { ProductCount } from '../../products/[productId]/action';
@@ -9,12 +9,12 @@ import Button from './Button';
 import styles from './CartList.module.scss';
 
 type Props = {
-  callItems: Promise<Product[]>;
-  productCookies: Promise<ProductCount[]>;
+  callItems: Product[];
+  productCookies: ProductCount[];
 };
 export default function CartList(props: Props) {
-  const products: Product[] = use(props.callItems);
-  const cookieItem: ProductCount[] = use(props.productCookies);
+  const products: Product[] = props.callItems;
+  const cookieItem: ProductCount[] = props.productCookies;
 
   const [cartItems, setCartItems] = useState<ProductCount[]>(cookieItem);
 

@@ -1,36 +1,25 @@
-export type Products = { id: number; productName: string; price: number };
-export const products: Products[] = [
-  {
-    id: 1,
-    productName: 'Cat-Walk',
-    price: 500,
-  },
-  {
-    id: 2,
-    productName: 'Food',
-    price: 15,
-  },
-  {
-    id: 3,
-    productName: 'Toy',
-    price: 3,
-  },
-  {
-    id: 4,
-    productName: 'Toilet',
-    price: 25,
-  },
-  {
-    id: 5,
-    productName: 'Sofa',
-    price: 100,
-  },
-];
+import { cache } from 'react';
+import type { Product } from '../migrations/00002-createTableProducts';
+import { sql } from './connect';
 
-export function getProducts() {
-  return products;
-}
+export const getProductsInsecure = cache(async () => {
+  const product = await sql<Product[]>`
+    SELECT
+      *
+    FROM
+      products
+  `;
+  return product;
+});
 
-export function getProduct(id: number) {
-  return products.find((product) => product.id === id);
-}
+export const getProductInsecure = cache(async (id: number) => {
+  const product = await sql<Product[]>`
+    SELECT
+      *
+    FROM
+      products
+    WHERE
+      id = ${id}
+  `;
+  return product[0];
+});

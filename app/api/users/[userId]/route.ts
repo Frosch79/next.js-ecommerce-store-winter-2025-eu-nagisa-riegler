@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getUsersCartInsecure } from '../../../../database/users';
+import { getUsersCartInsecure } from '../../../../database/cart';
 import type { UserCart } from '../../../../migrations/00004-createTableCart';
 
 type UserResponseBodyGet = { user: UserCart } | { error: string };

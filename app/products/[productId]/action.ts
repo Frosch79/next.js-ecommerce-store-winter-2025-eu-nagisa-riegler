@@ -8,11 +8,8 @@ export type ProductCount = {
   count: number;
 };
 
-export async function createCookie(
-  productCount: ProductCount,
-  objName: string,
-) {
-  const cookie = await getCookies(objName);
+export async function createCookie(productCount: ProductCount) {
+  const cookie = await getCookies('cart');
 
   const testStoreCookie = !cookie ? [] : perseJson(cookie);
   if (!testStoreCookie) return undefined;
@@ -23,5 +20,5 @@ export async function createCookie(
   } else {
     findCookie.count += productCount.count;
   }
-  (await cookies()).set(objName, JSON.stringify(testStoreCookie));
+  (await cookies()).set('cart', JSON.stringify(testStoreCookie));
 }

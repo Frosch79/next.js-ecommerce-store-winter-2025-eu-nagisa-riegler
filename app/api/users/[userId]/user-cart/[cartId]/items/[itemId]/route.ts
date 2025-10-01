@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getUserCartItemsInsecure } from '../../../../../../../../database/users';
+import { getUserCartItemsInsecure } from '../../../../../../../../database/cart-item';
 import type { CartItem } from '../../../../../../../../migrations/00006-createTableCartItems';
 
 type CartItemResponseBodyGet = { cart: CartItem[] } | { error: string };

@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
-import type { Products } from '../../../database/products';
-import { getProductInsecure } from '../../../database/users';
+import { getProductInsecure } from '../../../database/products';
+import type { Product } from '../../../migrations/00002-createTableProducts';
 import Counter from './Counter';
 import styles from './page.module.scss';
 
 type Props = {
   params: Promise<{
-    productId: Products['id'];
+    productId: Product['id'];
   }>;
 };
 export async function generateMetadata(props: Props) {
@@ -22,7 +22,7 @@ export async function generateMetadata(props: Props) {
   };
 }
 
-export default async function Product(props: Props) {
+export default async function ProductPage(props: Props) {
   const catProduct = await getProductInsecure(
     Number((await props.params).productId),
   );
@@ -40,6 +40,7 @@ export default async function Product(props: Props) {
             alt={`image-${catProduct.productName}`}
             width={400}
             height={300}
+            style={{ width: '100%', height: 'auto' }}
           />
         </li>
         <li

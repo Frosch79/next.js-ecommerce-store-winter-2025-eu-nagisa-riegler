@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { getProductsInsecure } from '../../database/users';
+import { getProductsInsecure } from '../../database/products';
 import styles from './page.module.scss';
 
 export const metadata = {
@@ -31,6 +31,7 @@ export default async function Products() {
                   alt={`image-${product.productName}`}
                   width={200}
                   height={120}
+                  style={{ width: '100%', height: 'auto' }}
                 />
               </Link>
             </li>
