@@ -1,8 +1,8 @@
 import type { ProductCount } from '../app/products/[productId]/action';
-import type { Products } from '../database/products';
+import type { Product } from '../migrations/00002-createTableProducts';
 
 // CartList
-export function calculateTotal(objA: Products[], objB: ProductCount[]) {
+export function calculateTotal(objA: Product[], objB: ProductCount[]) {
   if (typeof objA !== 'object' || typeof objB !== 'object') {
     throw new Error('Pass only Object');
   }
