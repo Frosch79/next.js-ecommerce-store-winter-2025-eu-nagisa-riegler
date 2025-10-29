@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { createUserCartItemsInsecure } from '../../../../../../../database/cart-item';
+import { createUserCartItemsInsecure } from '../../../../../database/cart-item';
 import {
   type CartItem,
   itemSchema,
-} from '../../../../../../../migrations/00006-createTableCartItems';
+} from '../../../../../migrations/00006-createTableCartItems';
 
 export type ItemResponseBodyPost = { item: CartItem[] } | { error: string };
 

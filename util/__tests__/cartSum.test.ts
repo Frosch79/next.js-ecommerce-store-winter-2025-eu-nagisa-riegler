@@ -1,8 +1,8 @@
 import { expect, test } from '@jest/globals';
-import { calculateTotal, cartCounter } from '../cartSum';
+import { calculateTotal, countCartItems } from '../totalCartSum';
 
 test('add products and inside of cart ', () => {
-  const product = [
+  const products = [
     {
       id: 1,
       productName: 'Cat-Walk',
@@ -30,26 +30,26 @@ test('add products and inside of cart ', () => {
     },
   ];
 
-  const cashData1 = [
+  const cacheDataFirst = [
     { id: 1, count: 3 },
     { id: 3, count: 5 },
     { id: 4, count: 1 },
   ];
 
-  const cashData2 = [
+  const cacheDataSecond = [
     { id: 5, count: 2 },
     { id: 1, count: 3 },
     { id: 3, count: 1 },
   ];
-  const cashData3: any[] = [];
+  const cacheDataThird: any[] = [];
 
-  expect(calculateTotal(product, cashData1)).toBe(1540);
-  expect(calculateTotal(product, cashData2)).toBe(1703);
-  expect(calculateTotal(product, cashData3)).toBe(0);
+  expect(calculateTotal(products, cacheDataFirst)).toBe(1540);
+  expect(calculateTotal(products, cacheDataSecond)).toBe(1703);
+  expect(calculateTotal(products, cacheDataThird)).toBe(0);
 });
 
 test('add products and inside of cart ', () => {
-  const product = [
+  const products = [
     {
       id: '2',
       productName: 156,
@@ -77,60 +77,74 @@ test('add products and inside of cart ', () => {
     },
   ];
 
-  const cashData1 = [
+  const cacheDataFirst = [
     { id: '', count: true },
     { id: 9, count: 'five' },
     { id: null, count: 1 },
   ];
 
-  const cashData2 = [
+  const cacheDataSecond = [
     { id: false, count: 2 },
     { id: 'cat', count: 5 },
     { id: 3, count: undefined },
   ];
+
+  const cacheDataThird = [
+    { id: 3, count: 2 },
+    { id: 5, count: 5 },
+    { id: 3, count: 5 },
+  ];
   // @ts-expect-error
-  expect(() => calculateTotal(product, cashData1)).toThrow('Pass only number');
+  expect(() => calculateTotal(products, cacheDataFirst)).toThrow(
+    'Pass only number',
+  );
   // @ts-expect-error
-  expect(() => calculateTotal(product, cashData2)).toThrow('Pass only number');
+  expect(() => calculateTotal(products, cacheDataSecond)).toThrow(
+    'Pass only number',
+  );
   // @ts-expect-error
-  expect(() => calculateTotal(5, undefined)).toThrow('Pass only Object');
+  expect(() => calculateTotal(products, cacheDataThird)).toThrow(
+    'Data type mismatch',
+  );
+  // @ts-expect-error
+  expect(() => calculateTotal(5, undefined)).toThrow('Pass only object');
 });
 
-test('add the Object from cash data', () => {
-  const cashData1 = [
+test('add the Object from cache data', () => {
+  const cacheDataFirst = [
     { id: 1, count: 3 },
     { id: 3, count: 5 },
     { id: 4, count: 1 },
   ];
 
-  const cashData2 = [
+  const cacheDataSecond = [
     { id: 5, count: 2 },
     { id: 1, count: 3 },
     { id: 3, count: 1 },
   ];
-  const cashData3: any[] = [];
+  const cacheDataThird: any[] = [];
 
-  expect(cartCounter(cashData1)).toBe(9);
-  expect(cartCounter(cashData2)).toBe(6);
-  expect(cartCounter(cashData3)).toBe(0);
+  expect(countCartItems(cacheDataFirst)).toBe(9);
+  expect(countCartItems(cacheDataSecond)).toBe(6);
+  expect(countCartItems(cacheDataThird)).toBe(0);
 });
 
 test('add products and inside of cart ', () => {
-  const cashData1 = [
+  const cacheDataFirst = [
     { id: '', count: true },
     { id: 9, count: 'five' },
     { id: null, count: 1 },
   ];
 
-  const cashData2 = [
+  const cacheDataSecond = [
     { id: false, count: 2 },
     { id: 'cat', count: 5 },
     { id: 3, count: undefined },
   ];
   // @ts-expect-error
-  expect(() => cartCounter(cashData1)).toThrow('Pass only number');
+  expect(() => countCartItems(cacheDataFirst)).toThrow('Pass only number');
   // @ts-expect-error
-  expect(() => cartCounter(cashData2)).toThrow('Pass only number');
+  expect(() => countCartItems(cacheDataSecond)).toThrow('Pass only number');
   // @ts-expect-error
-  expect(() => cartCounter(5)).toThrow('Pass only Object');
+  expect(() => countCartItems(5)).toThrow('Pass only object');
 });

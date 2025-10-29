@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
-import type { Product } from '../../../migrations/00002-createTableProducts';
-import { removeProductCookies } from '../../check-out/action';
-import type { ProductCount } from '../../products/[productId]/action';
+import { useMemo } from 'react';
+import type { Product } from '../../migrations/00002-createTableProducts';
+import { testCart } from '../../util/cartCache';
+import { calculateTotal } from '../../util/totalCartSum';
+import type { ProductCount } from '../products/[productId]/action';
+import { changeProductCookies } from './action';
 import Button from './Button';
 import styles from './CartList.module.scss';
 
@@ -16,39 +18,19 @@ export default function CartList(props: Props) {
   const products: Product[] = props.callItems;
   const cookieItem: ProductCount[] = props.productCookies;
 
-  const [cartItems, setCartItems] = useState<ProductCount[]>(cookieItem);
-
   const total = useMemo(() => {
-    if (cartItems.length === 0) return 0;
-    const calculateTotal = cartItems.reduce(
-      (sum: number, item: ProductCount): number => {
-        const findItem = products.find(
-          (product: Product) => product.id === item.id,
-        );
-        if (!findItem) return 0;
-
-        return sum + findItem.price * item.count;
-      },
-      0,
-    );
-    return calculateTotal;
-  }, [cartItems, products]);
+    return calculateTotal(products, cookieItem);
+  }, [cookieItem, products]);
 
   const removeHandle = async (id: number) => {
-    const newItemsArray = cartItems.filter((item) => {
-      return id !== item.id;
-    });
-
-    await removeProductCookies(newItemsArray);
-
-    setCartItems(newItemsArray);
+    await changeProductCookies(cookieItem, id);
   };
+
+  const testedItems = testCart(cookieItem, products);
 
   return (
     <div>
-      {cartItems.map((obj) => {
-        const findItem = products.find((product) => obj.id === product.id);
-        if (!findItem) return <p key="message">Your Cart is empty</p>;
+      {testedItems.map((obj) => {
         return (
           <div
             className={styles.cartItems}
@@ -58,14 +40,14 @@ export default function CartList(props: Props) {
             <ul>
               <li>
                 <Link href={`/products/${obj.id}`}>
-                  {findItem.productName.replace('-', ' ')}
+                  {obj.productName.replace('-', ' ')}
                 </Link>
               </li>
               <li className={styles.priceText}>
                 <p
                   data-test-id={`cart-product-quantity-${obj.id}`}
                 >{`${obj.count}`}</p>
-                <p>{`price:${findItem.price * obj.count}`}</p>
+                <p>{`price:${obj.price * obj.count}`}</p>
               </li>
             </ul>
             <Button

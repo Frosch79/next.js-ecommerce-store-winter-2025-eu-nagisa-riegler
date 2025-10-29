@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 import { type FormEvent, useState } from 'react';
 import type { CartItem } from '../../migrations/00006-createTableCartItems';
 import { getLocalStorage, setLocalStorage } from '../../util/localStorage';
-import type { ItemResponseBodyPost } from '../api/users/[userId]/user-cart/[cartId]/items/route';
-import type { CartResponseBodyPost } from '../api/users/[userId]/user-cart/route';
+import type { ItemResponseBodyPost } from '../api/cart/[cartId]/items/route';
+import type { CartResponseBodyPost } from '../api/cart/route';
 import ErrorMessage from '../ErrorMessage';
 import type { ProductCount } from '../products/[productId]/action';
 import { deleteProductCookies } from './action';
@@ -90,7 +90,7 @@ export default function InputForm(props: Props) {
       return;
     }
 
-    const response = await fetch('/api/users/1/user-cart', {
+    const response = await fetch('/api/cart', {
       method: 'POST',
       body: JSON.stringify({
         userId: 1,
@@ -123,7 +123,7 @@ export default function InputForm(props: Props) {
         productsId: item.id,
         quantity: item.count,
       };
-      const itemResponse = await fetch(`/api/users/1/user-cart/${id}/items`, {
+      const itemResponse = await fetch(`/api/cart/${id}/items`, {
         method: 'POST',
         body: JSON.stringify(itemData),
       });

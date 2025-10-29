@@ -31,23 +31,22 @@ export default async function ProductPage(props: Props) {
   return (
     <div className={styles.page}>
       <h1>{catProduct.productName.replace('-', ' ')}</h1>
-      <ul key={`product-${catProduct.id}`}>
-        <li>
-          <Image
-            className={styles.image}
-            data-test-id="product-image"
-            src={`/images/${catProduct.productName.toLowerCase()}.jpg`}
-            alt={`image-${catProduct.productName}`}
-            width={400}
-            height={300}
-            style={{ width: '100%', height: 'auto' }}
-          />
-        </li>
-        <li
-          className={styles.price}
-          data-test-id="product-price"
-        >{`${catProduct.price}`}</li>
-      </ul>
+
+      <div>
+        <Image
+          className={styles.image}
+          data-test-id="product-image"
+          src={`/images/${catProduct.productName.toLowerCase()}.jpg`}
+          alt={`image-${catProduct.productName}`}
+          width={400}
+          height={300}
+          style={{ width: '100%', height: 'auto' }}
+        />
+      </div>
+      <p
+        className={styles.price}
+        data-test-id="product-price"
+      >{`${catProduct.price}`}</p>
       <Counter productValue={catProduct.id} />
 
       {/* ul list of a product. shows price product name image  */}

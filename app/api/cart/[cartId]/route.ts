@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getUserCartInsecure } from '../../../../../../database/cart';
-import type { Cart } from '../../../../../../migrations/00004-createTableCart';
+import { getUserCartInsecure } from '../../../../database/cart';
+import type { Cart } from '../../../../migrations/00004-createTableCarts';
 
 type CartItemResponseBodyGet = { cart: Cart[] } | { error: string };
 type CartItemParams = {

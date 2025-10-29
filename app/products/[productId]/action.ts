@@ -2,6 +2,7 @@
 import { cookies } from 'next/headers';
 import { getCookies } from '../../../util/cookies';
 import { perseJson } from '../../../util/json';
+import { testCookie } from '../../../util/testCookie';
 
 export type ProductCount = {
   id: number;
@@ -11,14 +12,11 @@ export type ProductCount = {
 export async function createCookie(productCount: ProductCount) {
   const cookie = await getCookies('cart');
 
-  const testStoreCookie = !cookie ? [] : perseJson(cookie);
-  if (!testStoreCookie) return undefined;
-  const findCookie = testStoreCookie.find((obj) => obj.id === productCount.id);
-
-  if (!findCookie) {
-    testStoreCookie.push({ id: productCount.id, count: productCount.count });
-  } else {
-    findCookie.count += productCount.count;
+  let testStoreCookie = !cookie ? [] : perseJson(cookie);
+  if (!Array.isArray(testStoreCookie)) {
+    testStoreCookie = [];
   }
-  (await cookies()).set('cart', JSON.stringify(testStoreCookie));
+
+  const testedCookie = testCookie(testStoreCookie, productCount);
+  (await cookies()).set('cart', JSON.stringify(testedCookie));
 }

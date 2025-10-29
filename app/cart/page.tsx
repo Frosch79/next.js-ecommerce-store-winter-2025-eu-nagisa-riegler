@@ -1,6 +1,6 @@
-import { getProductsInsecure } from '../../../database/products';
-import { getCookies } from '../../../util/cookies';
-import { perseJson } from '../../../util/json';
+import { getProductsInsecure } from '../../database/products';
+import { getCookies } from '../../util/cookies';
+import { perseJson } from '../../util/json';
 import CartList from './CartList';
 import CheckOutButton from './CheckOutButton';
 import style from './page.module.scss';
@@ -13,8 +13,7 @@ export const metadata = {
 export default async function CartPage() {
   const cartProducts = await getProductsInsecure();
   const cookie = await getCookies('cart');
-  let perseStoreCookie =
-    typeof cookie === 'undefined' ? [] : perseJson(cookie) || [];
+  let perseStoreCookie = !cookie ? [] : perseJson(cookie) || [];
 
   if (!Array.isArray(perseStoreCookie)) {
     perseStoreCookie = [];

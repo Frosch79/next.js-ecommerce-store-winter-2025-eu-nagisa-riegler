@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { ReactNode } from 'react';
 import { getCookies } from '../util/cookies';
 import { perseJson } from '../util/json';
+import { countCartItems } from '../util/totalCartSum';
 import styles from './page.module.scss';
 
 const geistSans = Geist({
@@ -38,10 +39,8 @@ export default async function RootLayout(props: Props) {
     perseStoreCookie = [];
   }
 
-  const totalCart =
-    perseStoreCookie.length <= 0
-      ? 0
-      : perseStoreCookie.reduce((sum, value) => sum + value.count, 0);
+  const totalCart = countCartItems(perseStoreCookie);
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -72,7 +71,7 @@ export default async function RootLayout(props: Props) {
             </Link>
             <Link
               data-test-id="cart-link"
-              href="/users/cart"
+              href="/cart"
               prefetch={true}
               className={`${styles.textBorder} ${styles.cartLink}`}
             >

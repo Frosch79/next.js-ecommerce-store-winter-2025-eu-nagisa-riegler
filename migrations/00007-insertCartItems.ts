@@ -37,7 +37,7 @@ export async function up(sql: Sql) {
   for (const cart of cartItem) {
     await sql`
       INSERT INTO
-        cart_item (
+        cart_items (
           cart_id,
           products_id,
           quantity
@@ -55,7 +55,7 @@ export async function up(sql: Sql) {
 export async function down(sql: Sql) {
   for (const cart of cartItem) {
     await sql`
-      DELETE FROM cart_item
+      DELETE FROM cart_items
       WHERE
         id = ${cart.id}
     `;

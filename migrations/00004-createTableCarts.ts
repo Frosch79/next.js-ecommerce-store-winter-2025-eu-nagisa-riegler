@@ -28,7 +28,7 @@ export const cartSchema = z.object({
 
 export async function up(sql: Sql) {
   await sql`
-    CREATE TABLE cart (
+    CREATE TABLE carts (
       id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
       user_id integer NOT NULL REFERENCES users (id) ON DELETE CASCADE,
       date date NOT NULL
@@ -37,5 +37,5 @@ export async function up(sql: Sql) {
 }
 
 export async function down(sql: Sql) {
-  await sql` DROP TABLE cart`;
+  await sql` DROP TABLE carts`;
 }

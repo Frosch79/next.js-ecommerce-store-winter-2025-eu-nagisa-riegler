@@ -1,6 +1,7 @@
 import { getProductsInsecure } from '../../database/products';
 import { getCookies } from '../../util/cookies';
 import { perseJson } from '../../util/json';
+import { calculateTotal } from '../../util/totalCartSum';
 import InputForm from './InputForm';
 
 export const metadata = {
@@ -15,13 +16,15 @@ export default async function CheckOutPage() {
     typeof cookie === 'undefined' ? [] : perseJson(cookie) || [];
 
   const products = await getProductsInsecure();
-  const total = perseStoreCookie.reduce((sum, value) => {
+  const total = calculateTotal(products, perseStoreCookie);
+
+  /*   const total = perseStoreCookie.reduce((sum, value) => {
     const findProduct = products.find((obj) => obj.id === value.id);
 
     if (!findProduct) return 0;
 
     return sum + findProduct.price * value.count;
-  }, 0);
+  }, 0); */
 
   return (
     <div>

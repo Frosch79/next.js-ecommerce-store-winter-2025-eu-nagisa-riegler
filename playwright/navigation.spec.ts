@@ -79,7 +79,7 @@ test(' Add to cart, change quantity and remove from cart', async ({ page }) => {
   }
   await cart(count);
   await page.getByTestId(`cart-link`).click();
-  await page.waitForURL('/users/cart');
+  await page.waitForURL('/cart');
 
   // Remove items
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
@@ -203,7 +203,7 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
   }
 
   await page.getByTestId(`cart-link`).click();
-  await page.waitForURL('/users/cart');
+  await page.waitForURL('/cart');
   await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
 
   const cartLength = (
@@ -289,7 +289,7 @@ test('Checkout flow, payment page, thank you page', async ({ page }) => {
           ),
       ).toBeVisible();
       await page.getByTestId(`cart-link`).click();
-      await page.waitForURL('/users/cart');
+      await page.waitForURL('/cart');
       await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
       expect(
         (await page.locator('[data-test-id*="cart-product"]').all()).length,

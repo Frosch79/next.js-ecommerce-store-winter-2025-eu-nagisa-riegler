@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import { allUserData, userShoppingCart } from '../dataStructure';
+import { mergeUserData, userShoppingCart } from '../dataStructure';
 
 test('all user data', () => {
   const cartDate = new Date();
@@ -47,7 +47,7 @@ test('all user data', () => {
     ],
   };
 
-  expect(allUserData(userData)).toStrictEqual(testAllUserData);
+  expect(mergeUserData(userData)).toStrictEqual(testAllUserData);
 });
 
 test('all user data', () => {

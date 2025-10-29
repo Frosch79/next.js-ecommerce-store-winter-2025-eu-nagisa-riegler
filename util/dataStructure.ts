@@ -1,4 +1,4 @@
-export function allUserData(
+export function mergeUserData(
   userCart: {
     userId: number;
     firstName: string;
