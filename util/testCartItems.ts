@@ -1,7 +1,7 @@
 import type { ProductCount } from '../app/products/[productId]/action';
 import type { Product } from '../migrations/00002-createTableProducts';
 
-export function testCart(cookies: ProductCount[], products: Product[]) {
+export function testCartItems(cookies: ProductCount[], products: Product[]) {
   if (!(cookies instanceof Object) || !(products instanceof Object)) {
     throw new Error('Pass only object');
   }

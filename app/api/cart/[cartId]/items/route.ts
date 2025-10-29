@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { createUserCartItemsInsecure } from '../../../../../database/cart-item';
+import { createUserCartItemsInsecure } from '../../../../../database/cart-items';
 import {
   type CartItem,
   itemSchema,

@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import { calculateTotal, countCartItems } from '../totalCartSum';
+import { calculateTotal, countCartItems } from '../calculateCartSum';
 
 test('add products and inside of cart ', () => {
   const products = [

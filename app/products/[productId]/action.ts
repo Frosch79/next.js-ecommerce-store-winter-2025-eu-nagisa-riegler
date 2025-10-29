@@ -2,7 +2,7 @@
 import { cookies } from 'next/headers';
 import { getCookies } from '../../../util/cookies';
 import { perseJson } from '../../../util/json';
-import { testCookie } from '../../../util/testCookie';
+import { testCookie } from '../../../util/testCookiesData';
 
 export type ProductCount = {
   id: number;

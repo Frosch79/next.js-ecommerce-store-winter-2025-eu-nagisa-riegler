@@ -2,9 +2,9 @@ import './globals.scss';
 import { Geist, Geist_Mono } from 'next/font/google';
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { countCartItems } from '../util/calculateCartSum';
 import { getCookies } from '../util/cookies';
 import { perseJson } from '../util/json';
-import { countCartItems } from '../util/totalCartSum';
 import styles from './page.module.scss';
 
 const geistSans = Geist({

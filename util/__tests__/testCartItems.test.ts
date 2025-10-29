@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import { testCart } from '../cartCache';
+import { testCartItems } from '../testCartItems';
 
 test('add cached cart data and products data', () => {
   const products = [
@@ -43,17 +43,17 @@ test('add cached cart data and products data', () => {
   ];
   const cacheDataThird: any[] = [];
 
-  expect(testCart(cacheDataFirst, products)).toStrictEqual([
+  expect(testCartItems(cacheDataFirst, products)).toStrictEqual([
     { id: 1, price: 500, productName: 'Cat-Walk', count: 3 },
     { id: 3, price: 3, productName: 'Toy', count: 5 },
     { id: 4, price: 25, productName: 'Toilet', count: 1 },
   ]);
-  expect(testCart(cacheDataSecond, products)).toStrictEqual([
+  expect(testCartItems(cacheDataSecond, products)).toStrictEqual([
     { id: 5, price: 100, productName: 'Sofa', count: 2 },
     { id: 1, price: 500, productName: 'Cat-Walk', count: 3 },
     { id: 3, price: 3, productName: 'Toy', count: 1 },
   ]);
-  expect(testCart(cacheDataThird, products)).toStrictEqual([]);
+  expect(testCartItems(cacheDataThird, products)).toStrictEqual([]);
 });
 
 test('add cached cart data and products data', () => {
@@ -104,10 +104,16 @@ test('add cached cart data and products data', () => {
   ];
   // @ts-expect-error
 
-  expect(() => testCart(cacheDataFirst, products)).toThrow('Pass only number');
+  expect(() => testCartItems(cacheDataFirst, products)).toThrow(
+    'Pass only number',
+  );
 
   // @ts-expect-error
-  expect(() => testCart(cacheDataSecond, products)).toThrow('Pass only number');
+  expect(() => testCartItems(cacheDataSecond, products)).toThrow(
+    'Pass only number',
+  );
 
-  expect(() => testCart(cacheDataThird, products)).toThrow('Product not found');
+  expect(() => testCartItems(cacheDataThird, products)).toThrow(
+    'Product not found',
+  );
 });

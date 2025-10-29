@@ -3,10 +3,10 @@
 import Link from 'next/link';
 import { useMemo } from 'react';
 import type { Product } from '../../migrations/00002-createTableProducts';
-import { testCart } from '../../util/cartCache';
-import { calculateTotal } from '../../util/totalCartSum';
+import { calculateTotal } from '../../util/calculateCartSum';
+import { testCartItems } from '../../util/testCartItems';
 import type { ProductCount } from '../products/[productId]/action';
-import { changeProductCookies } from './action';
+import { changeProductCookie } from './action';
 import Button from './Button';
 import styles from './CartList.module.scss';
 
@@ -23,10 +23,10 @@ export default function CartList(props: Props) {
   }, [cookieItem, products]);
 
   const removeHandle = async (id: number) => {
-    await changeProductCookies(cookieItem, id);
+    await changeProductCookie(cookieItem, id);
   };
 
-  const testedItems = testCart(cookieItem, products);
+  const testedItems = testCartItems(cookieItem, products);
 
   return (
     <div>

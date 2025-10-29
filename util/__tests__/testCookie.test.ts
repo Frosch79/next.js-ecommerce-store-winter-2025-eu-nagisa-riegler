@@ -1,5 +1,5 @@
 import { expect, test } from '@jest/globals';
-import { testCookie, testRemoveCookie } from '../testCookie';
+import { testCookie, testRemoveCookie } from '../testCookiesData';
 
 const prevCookiesFirst = [
   { id: 3, count: 7 },
@@ -41,7 +41,7 @@ const resultCookieFourth = [
   { id: 1, count: 3 },
 ];
 
-test('create cookie test', () => {
+test('test create cookie', () => {
   expect(testCookie(prevCookiesFirst, newCookiesFirst)).toStrictEqual(
     resultCookieFirst,
   );
@@ -69,7 +69,7 @@ test('throws an error when dates is invalid', () => {
   );
 });
 
-test('remove cookie test', () => {
+test('test remove cookie', () => {
   expect(testRemoveCookie(prevCookiesFirst, 1)).toStrictEqual(
     resultCookieThird,
   );

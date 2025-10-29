@@ -1,7 +1,7 @@
 import { getProductsInsecure } from '../../database/products';
+import { calculateTotal } from '../../util/calculateCartSum';
 import { getCookies } from '../../util/cookies';
 import { perseJson } from '../../util/json';
-import { calculateTotal } from '../../util/totalCartSum';
 import InputForm from './InputForm';
 
 export const metadata = {
