@@ -1,5 +1,5 @@
 app = "ecommerce-store-winter-2025-eu-nagisa-riegler"
-primary_region = "otp"
+primary_region = "ams"
 
 [mounts]
   source = "postgres"
